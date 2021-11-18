@@ -2,25 +2,57 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class CarDAO {
 
     //  Create/Upload from CSV file
     public static void createCar(Car c){
         Connection con = DriverConnection.getConnection();
-        final String query="insert into car(Cname,Cprice,Cmileage) values(?,?,?)";
 
-        try(PreparedStatement st= con.prepareStatement(query)){
-            st.setString(1, c.getCname());
-            st.setInt(2, c.getCprice());
-            st.setInt(3, c.getCmileage());
+        List<Car> list= getCarByID(c.getCid());
+        if(list.isEmpty()){
+            final String query="insert into car(Cid,Cname,Cprice,Cmileage) values(?,?,?,?)";
 
-            int rowsAffected = st.executeUpdate();
-            System.out.println(rowsAffected+"  rows created.");
+            try(PreparedStatement st= con.prepareStatement(query)){
+                st.setString(1, c.getCid());
+                st.setString(2, c.getCname());
+                st.setInt(3, c.getCprice());
+                st.setInt(4, c.getCmileage());
+    
+                int rowsAffected = st.executeUpdate();
+                System.out.println(rowsAffected+"  row created.");
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
         }
-        catch(SQLException e){
-            e.printStackTrace();
+
+        else{   
+            final String query= "update car set Cname=?, Cprice=?, Cmileage=? where Cid=?";
+            try(PreparedStatement st= con.prepareStatement(query)){
+                st.setString(1,c.getCname());
+                st.setInt(2,c.getCprice());
+                st.setInt(3,c.getCmileage());
+                st.setString(4,c.getCid());
+                int rowsAffected = st.executeUpdate();
+                System.out.println(rowsAffected+"  row updated.");
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
         }
+
+
     }
+                
+        
+    
+
+        
+ 
+    
+
 
 
 
@@ -28,15 +60,16 @@ public class CarDAO {
     // Insert new item from cmd line
     public static void insertCar(Car c){
         Connection con = DriverConnection.getConnection();
-        final String query="insert into car(Cname,Cprice,Cmileage) values(?,?,?)";
+        final String query="insert into car(Cid,Cname,Cprice,Cmileage) values(?,?,?,?)";
 
         try(PreparedStatement st= con.prepareStatement(query)){
-            st.setString(1, c.getCname());
-            st.setInt(2, c.getCprice());
-            st.setInt(3, c.getCmileage());
+            st.setString(1, c.getCid());
+            st.setString(2, c.getCname());
+            st.setInt(3, c.getCprice());
+            st.setInt(4, c.getCmileage());
 
             int rowsAffected = st.executeUpdate();
-            System.out.println(rowsAffected+"  rows created.");
+            System.out.println(rowsAffected+"  row created.");
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -48,14 +81,14 @@ public class CarDAO {
 
 
     //delete by car name
-    public static void deleteCar(String car_name){
+    public static void deleteCar(String car_id){
         Connection con = DriverConnection.getConnection();
-        final String query="delete from car where Cname= ? ";
+        final String query="delete from car where Cid= ? ";
 
         try(PreparedStatement st= con.prepareStatement(query)){
-            st.setString(1, car_name);
+            st.setString(1, car_id);
             int rowsAffected = st.executeUpdate();
-            System.out.println(rowsAffected+" rows deleted.");
+            System.out.println(rowsAffected+" row deleted.");
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -85,13 +118,13 @@ public class CarDAO {
     //Create
     public static void updateCar(Car c){
         Connection con = DriverConnection.getConnection();
-        final String query= "update car set Cprice=?, Cmileage=? where Cname=?";
-
-        
+        final String query= "update car set Cname=?, Cprice=?, Cmileage=? where Cid=?";
         try(PreparedStatement st= con.prepareStatement(query)){
-            st.setInt(1,c.getCprice());
-            st.setInt(2,c.getCmileage());
-            st.setString(3,c.getCname());
+
+            st.setString(1,c.getCname());
+            st.setInt(2,c.getCprice());
+            st.setInt(3,c.getCmileage());
+            st.setString(4,c.getCid());
            
             int rowsAffected =st.executeUpdate();
             System.out.println(rowsAffected+" row updated.");
@@ -114,7 +147,7 @@ public class CarDAO {
                 st.setInt(1,num);
                 ResultSet rs = st.executeQuery();
                 while(rs.next()){
-                    Car tempcar = new Car(rs.getString(1),rs.getInt(2),rs.getInt(3));
+                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
                     c.add(tempcar);
                 }
     
@@ -136,7 +169,7 @@ public class CarDAO {
                 st.setInt(1,num);
                 ResultSet rs = st.executeQuery();
                 while(rs.next()){
-                    Car tempcar = new Car(rs.getString(1),rs.getInt(2),rs.getInt(3));
+                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
                     c.add(tempcar);
                 }
     
@@ -161,7 +194,7 @@ public class CarDAO {
                 st.setInt(1,num);
                 ResultSet rs = st.executeQuery();
                 while(rs.next()){
-                    Car tempcar = new Car(rs.getString(1),rs.getInt(2),rs.getInt(3));
+                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
                     c.add(tempcar);
                 }
     
@@ -183,7 +216,7 @@ public class CarDAO {
                 st.setInt(1,num);
                 ResultSet rs = st.executeQuery();
                 while(rs.next()){
-                    Car tempcar = new Car(rs.getString(1),rs.getInt(2),rs.getInt(3));
+                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
                     c.add(tempcar);
                 }
     
@@ -212,7 +245,7 @@ public class CarDAO {
 
                 ResultSet rs = st.executeQuery();
                 while(rs.next()){
-                    Car tempcar = new Car(rs.getString(1),rs.getInt(2),rs.getInt(3));
+                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
                     c.add(tempcar);
                 }
             }
@@ -225,16 +258,17 @@ public class CarDAO {
 
 
     //Read
-    public static List<Car> getCarByName(String name){
+    public static List<Car> getCarByID(String id){
         List<Car>  c = new ArrayList<Car>();
         Connection con = DriverConnection.getConnection();
-        final String query = "select * from car where Cname= ?";
+        final String query = "select * from car where Cid= ?";
+
 
         try(PreparedStatement st = con.prepareStatement(query)){
-            st.setString(1,name);
+            st.setString(1,id);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                Car tempcar = new Car(rs.getString(1),rs.getInt(2),rs.getInt(3));
+                Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
                 c.add(tempcar);
             }
 

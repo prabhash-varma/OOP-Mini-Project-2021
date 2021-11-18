@@ -2,12 +2,14 @@
 
 public class Car {
 
+    private String cid;
     private String cname;
     private int cprice;
     private int cmileage;
 
 
-    public Car(String cname, int cprice, int cmileage) {
+    public Car(String cid,String cname, int cprice, int cmileage) {
+        this.cid=cid;
         this.cname = cname;
         this.cprice = cprice;
         this.cmileage = cmileage;
@@ -16,11 +18,24 @@ public class Car {
 
     public Car(String str){
         String[] values = str.split(",");
-        this.cname=values[0];
-        this.cprice= Integer.parseInt(values[1]);
-        this.cmileage= Integer.parseInt(values[2]);
+        this.cid=values[0];
+        this.cname=values[1];
+        this.cprice= Integer.valueOf(values[2]);
+        this.cmileage= Integer.valueOf(values[3]);
     }
 
+
+
+    
+
+    public String getCid() {
+        return cid;
+    }
+
+
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
 
 
     public String getCname() {
@@ -50,6 +65,6 @@ public class Car {
 
     @Override
     public String toString(){
-        return " Car[ Car name: " + this.cname + ", Car Price: " + this.cprice + ", Car Mileage: " + this.cmileage + "]";
+        return " Car[ Car id: "+this.cid+ ", Car name: " + this.cname + ", Car Price: " + this.cprice + ", Car Mileage: " + this.cmileage + "]";
     }
 }
