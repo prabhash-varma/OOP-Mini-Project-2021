@@ -67,10 +67,11 @@ public class CarDAO {
     //Delete All rows
     public static void deleteAllCar(){
         Connection con = DriverConnection.getConnection();
-        final String query="Truncate table car ";
+        final String query="Truncate table car";
 
         try(PreparedStatement st= con.prepareStatement(query)){
-            System.out.println(" ALL rows deleted.");
+            int rows= st.executeUpdate();
+            System.out.println("All rows deleted.");
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -82,16 +83,18 @@ public class CarDAO {
 
 
     //Create
-    public static void updateCar(String carname,int carprice,int carmileage){
+    public static void updateCar(Car c){
         Connection con = DriverConnection.getConnection();
         final String query= "update car set Cprice=?, Cmileage=? where Cname=?";
-        try(PreparedStatement st= con.prepareStatement(query)){
-            st.setString(1,carname);
-            st.setInt(2,carprice);
-            st.setInt(3,carmileage);
 
-            int rowsAffected = st.executeUpdate();
-            System.out.println(rowsAffected+"  rows updated.");
+        
+        try(PreparedStatement st= con.prepareStatement(query)){
+            st.setInt(1,c.getCprice());
+            st.setInt(2,c.getCmileage());
+            st.setString(3,c.getCname());
+           
+            int rowsAffected =st.executeUpdate();
+            System.out.println(rowsAffected+" row updated.");
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -100,6 +103,103 @@ public class CarDAO {
     }
 
 
+
+
+    //Search by price
+    public static List<Car> search_price_gt(int num) {
+        List<Car> c= new ArrayList<Car>();
+            Connection con= DriverConnection.getConnection();
+            final String query = "select * from car where Cprice > ?";
+            try(PreparedStatement st = con.prepareStatement(query)){
+                st.setInt(1,num);
+                ResultSet rs = st.executeQuery();
+                while(rs.next()){
+                    Car tempcar = new Car(rs.getString(1),rs.getInt(2),rs.getInt(3));
+                    c.add(tempcar);
+                }
+    
+            }
+    
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+
+            return c;
+    }
+
+
+    public static List<Car> search_price_less(int num) {
+        List<Car> c= new ArrayList<Car>();
+            Connection con= DriverConnection.getConnection();
+            final String query = "select * from car where Cprice < ?";
+            try(PreparedStatement st = con.prepareStatement(query)){
+                st.setInt(1,num);
+                ResultSet rs = st.executeQuery();
+                while(rs.next()){
+                    Car tempcar = new Car(rs.getString(1),rs.getInt(2),rs.getInt(3));
+                    c.add(tempcar);
+                }
+    
+            }
+    
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+
+            return c;
+    }
+
+
+
+
+    //search by mileage
+    public static List<Car> search_mileage_gt(int num) {
+        List<Car> c= new ArrayList<Car>();
+            Connection con= DriverConnection.getConnection();
+            final String query = "select * from car where Cmileage > ?";
+            try(PreparedStatement st = con.prepareStatement(query)){
+                st.setInt(1,num);
+                ResultSet rs = st.executeQuery();
+                while(rs.next()){
+                    Car tempcar = new Car(rs.getString(1),rs.getInt(2),rs.getInt(3));
+                    c.add(tempcar);
+                }
+    
+            }
+    
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+
+            return c;
+    }
+
+
+    public static List<Car> search_mileage_less(int num) {
+        List<Car> c= new ArrayList<Car>();
+            Connection con= DriverConnection.getConnection();
+            final String query = "select * from car where Cmileage < ?";
+            try(PreparedStatement st = con.prepareStatement(query)){
+                st.setInt(1,num);
+                ResultSet rs = st.executeQuery();
+                while(rs.next()){
+                    Car tempcar = new Car(rs.getString(1),rs.getInt(2),rs.getInt(3));
+                    c.add(tempcar);
+                }
+    
+            }
+    
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+
+            return c;
+    }
+
+
+
+
+    
 
     //Read - ALL
     public static List<Car> getAllCars(){
