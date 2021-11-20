@@ -56,8 +56,8 @@ public static List<Car> getCarByID(String id){
     return c;
 }
 public static List<Car> getCarByCname(String tname){
-    tname.toLowerCase();
-    String name= tname.substring(0,1).toUpperCase() + tname.substring(1);
+    int i=0;
+    String name=tname.toLowerCase();
     List<Car> clist= new ArrayList<Car>();
     List<Car> tlist = new ArrayList<Car>();
     Connection con= DriverConnection.getConnection();
@@ -71,16 +71,22 @@ public static List<Car> getCarByCname(String tname){
             clist.add(tempcar);
         }
 
+        
 
       for (int index = 0; index < clist.size() ; index++) {
           if(clist.get(index).getCname().contains(name)){
               tlist.add(clist.get(index));
+          }
+          else{
+              i++;
           }
       }
     }
     catch(SQLException e){
         e.printStackTrace();
     }
+
+    System.out.println(i);
 return tlist;
 }
 }

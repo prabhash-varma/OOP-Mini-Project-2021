@@ -11,8 +11,8 @@
     public Car(String cid,String cname, int cprice, int cmileage) {
         this.cid=cid;
         
-        cname.toLowerCase();
-        this.cname=cname.substring(0,1).toUpperCase()+ cname.substring(1);
+        
+        this.cname=cname.toLowerCase();
         this.cprice = cprice;
         this.cmileage = cmileage;
     }
@@ -23,8 +23,7 @@
         String values[] = str.split(",");
         this.cid=values[0];
         String name = values[1];
-        name.toLowerCase();
-        this.cname=name.substring(0,1).toUpperCase()+ name.substring(1);
+        this.cname=name.toLowerCase();
         this.cprice= Integer.valueOf(values[2]);
         this.cmileage= Integer.valueOf(values[3]);
         
@@ -72,7 +71,9 @@
 
     @Override
     public String toString(){
-        return " Car[ Car id: "+this.cid+ ", Car name: " + this.cname + ", Car Price: " + this.cprice + ", Car Mileage: " + this.cmileage + "]";
+        String temp= this.cname;
+        String name= temp.substring(0,1).toUpperCase()+ temp.substring(1);
+        return " Car[ Car id: "+this.cid+ ", Car name: "+name+ ", Car Price: " + this.cprice + ", Car Mileage: " + this.cmileage + "]";
     }
 
 

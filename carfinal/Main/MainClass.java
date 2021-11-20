@@ -25,6 +25,7 @@ public class MainClass {
         String sline;
         while((sline= reader.readLine())!=null){
             CreateData.createCar(new Car(sline));
+          
         }
         reader.close();
 

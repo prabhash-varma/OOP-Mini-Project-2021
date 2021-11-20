@@ -17,9 +17,6 @@ public class CreateData {
         List<Car> list= new ArrayList<Car>();
         list = PrintData.getCarByID(c.getCid());
 
-    
-       
-
         if(list.isEmpty()){
             final String query="insert into car(Cid,Cname,Cprice,Cmileage) values(?,?,?,?)";
 
@@ -44,9 +41,12 @@ public class CreateData {
             
             if((temp.getCid().equals(c.getCid()))  && (temp.getCname().equals(c.getCname())) && (temp.getCprice()==c.getCprice()) && (temp.getCmileage()== c.getCmileage() )){
                 System.out.println("1 row Unaffected");
+               
             }
-
+            
+           
             else{
+
                 final String query= "update car set Cname=?, Cprice=?, Cmileage=? where Cid=?";
                 try(PreparedStatement st= con.prepareStatement(query)){
                     st.setString(1,c.getCname());
@@ -54,6 +54,7 @@ public class CreateData {
                     st.setInt(3,c.getCmileage());
                     st.setString(4,c.getCid());
                     int rowsAffected = st.executeUpdate();
+
                     System.out.println(rowsAffected+" row updated.");
                 }
                 catch(SQLException e){
