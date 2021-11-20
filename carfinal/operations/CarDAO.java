@@ -1,3 +1,10 @@
+
+package operations;
+
+import Car.*;
+import Connection.*;
+
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +17,12 @@ public class CarDAO {
     public static void createCar(Car c){
         Connection con = DriverConnection.getConnection();
 
-        List<Car> list= getCarByID(c.getCid());
+        List<Car> list= new ArrayList<Car>();
+        list = getCarByID(c.getCid());
+
+    
+       
+
         if(list.isEmpty()){
             final String query="insert into car(Cid,Cname,Cprice,Cmileage) values(?,?,?,?)";
 
@@ -21,29 +33,38 @@ public class CarDAO {
                 st.setInt(4, c.getCmileage());
     
                 int rowsAffected = st.executeUpdate();
-                System.out.println(rowsAffected+"  row created.");
+                System.out.println(rowsAffected+" row created.");
             }
             catch(SQLException e){
                 e.printStackTrace();
             }
         }
 
-        else{   
-            final String query= "update car set Cname=?, Cprice=?, Cmileage=? where Cid=?";
-            try(PreparedStatement st= con.prepareStatement(query)){
-                st.setString(1,c.getCname());
-                st.setInt(2,c.getCprice());
-                st.setInt(3,c.getCmileage());
-                st.setString(4,c.getCid());
-                int rowsAffected = st.executeUpdate();
-                System.out.println(rowsAffected+"  row updated.");
+               
+        else{ 
+            Car temp = new Car(list.get(0).getCid(),list.get(0).getCname(),list.get(0).getCprice(),list.get(0).getCmileage());
+    
+            
+            if((temp.getCid().equals(c.getCid()))  && (temp.getCname().equals(c.getCname())) && (temp.getCprice()==c.getCprice()) && (temp.getCmileage()== c.getCmileage() )){
+                System.out.println("1 row Unaffected");
             }
-            catch(SQLException e){
-                e.printStackTrace();
+
+            else{
+                final String query= "update car set Cname=?, Cprice=?, Cmileage=? where Cid=?";
+                try(PreparedStatement st= con.prepareStatement(query)){
+                    st.setString(1,c.getCname());
+                    st.setInt(2,c.getCprice());
+                    st.setInt(3,c.getCmileage());
+                    st.setString(4,c.getCid());
+                    int rowsAffected = st.executeUpdate();
+                    System.out.println(rowsAffected+" row updated.");
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
             }
+
         }
-
-
     }
                 
         
@@ -103,7 +124,7 @@ public class CarDAO {
         final String query="Truncate table car";
 
         try(PreparedStatement st= con.prepareStatement(query)){
-            int rows= st.executeUpdate();
+             st.executeUpdate();
             System.out.println("All rows deleted.");
         }
         catch(SQLException e){
@@ -279,5 +300,33 @@ public class CarDAO {
         }
 
         return c;
+    }
+    public static List<Car> getCarByCname(String tname){
+        tname.toLowerCase();
+        String name= tname.substring(0,1).toUpperCase() + tname.substring(1);
+        List<Car> clist= new ArrayList<Car>();
+        List<Car> tlist = new ArrayList<Car>();
+        Connection con= DriverConnection.getConnection();
+        final String query = "select * from car";
+
+        try(PreparedStatement st = con.prepareStatement(query)){
+
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+                clist.add(tempcar);
+            }
+
+
+          for (int index = 0; index < clist.size() ; index++) {
+              if(clist.get(index).getCname().contains(name)){
+                  tlist.add(clist.get(index));
+              }
+          }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    return tlist;
     }
 }
