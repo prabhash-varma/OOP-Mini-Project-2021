@@ -56,7 +56,7 @@ public static List<Car> getCarByID(String id){
     return c;
 }
 public static List<Car> getCarByCname(String tname){
-    int i=0;
+    
     String name=tname.toLowerCase();
     List<Car> clist= new ArrayList<Car>();
     List<Car> tlist = new ArrayList<Car>();
@@ -77,16 +77,14 @@ public static List<Car> getCarByCname(String tname){
           if(clist.get(index).getCname().contains(name)){
               tlist.add(clist.get(index));
           }
-          else{
-              i++;
-          }
+          
       }
     }
     catch(SQLException e){
         e.printStackTrace();
     }
 
-    System.out.println(i);
+   
 return tlist;
 }
 }
