@@ -17,7 +17,13 @@ public class UpdateData {
             st.setString(4,c.getCid());
            
             int rowsAffected =st.executeUpdate();
-            System.out.println(rowsAffected+" row updated.");
+
+            if(rowsAffected==0){
+                System.out.println("Error: Car NOT Found!!");
+            }
+            else{
+            System.out.println("Car with Id:"+c.getCid()+" has been updated.");
+            }
         }
         catch(SQLException e){
             e.printStackTrace();

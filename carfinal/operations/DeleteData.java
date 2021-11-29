@@ -5,7 +5,9 @@ import Connection.*;
 import java.sql.*;
 
 
+
 public class DeleteData {
+
     //delete by car name
     public static void deleteCar(String car_id){
         Connection con = DriverConnection.getConnection();
@@ -14,10 +16,16 @@ public class DeleteData {
         try(PreparedStatement st= con.prepareStatement(query)){
             st.setString(1, car_id);
             int rowsAffected = st.executeUpdate();
-            System.out.println(rowsAffected+" row deleted.");
+
+            if(rowsAffected==0){
+                System.out.println("Error: No car with Id:"+car_id+" !! ");
+            }
+            else{
+            System.out.println("Car with ID:"+car_id+" has been deleted.");
+            }
         }
         catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Error!! Try Again");
         }
     }
 
@@ -29,8 +37,14 @@ public class DeleteData {
         final String query="Truncate table car";
 
         try(PreparedStatement st= con.prepareStatement(query)){
-             st.executeUpdate();
-            System.out.println("All rows deleted.");
+            int rowsAffected = st.executeUpdate();
+
+            if(rowsAffected==0){
+                System.out.println("All Cars have been deleted.");
+            }
+            else{
+            System.out.println("All Cars have been deleted.");
+            }
         }
         catch(SQLException e){
             e.printStackTrace();

@@ -11,7 +11,7 @@ import java.util.List;
 
 
 
-public class CarDAO {
+abstract class CarDAO {
 
     //  Create/Upload from CSV file
     public static void createCar(Car c){

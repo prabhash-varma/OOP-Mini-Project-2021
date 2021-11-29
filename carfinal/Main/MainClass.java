@@ -4,12 +4,10 @@ import Car.*;
 import operations.*;
 
 import java.io.BufferedReader;
-//import java.io.BufferedWriter;
+import java.io.BufferedWriter;
 import java.io.FileReader;
-//import java.io.FileWriter;
-//import java.io.PrintWriter;
-//import java.lang.ref.Cleaner;
-//import java.util.Arrays;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.List;
 
 
@@ -19,8 +17,8 @@ public class MainClass {
     public static void main(String[] args) throws Exception {
 
     
-    
-   if(args[0].equals("enter")){
+    // 1) Create/Update via CSV--------------------------------------------------------------------------
+   if(args[0].equals("-enter")){
         BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Priya\\Desktop\\carfinal\\csv\\cars.csv"));
         String sline;
         while((sline= reader.readLine())!=null){
@@ -30,7 +28,12 @@ public class MainClass {
         reader.close();
 
     }      
-    
+
+
+
+
+
+    // 2) Insert new Data into CSV file & Database from Cmd line------------------------------------------
     else if(args[0].equals("-insert")){
         try {
 
@@ -41,16 +44,10 @@ public class MainClass {
             Car c1 = new Car(id,name,price,mil);
 
             InsertData.insertCar(c1);
-            
-        } catch (Exception e) {
-            System.out.println("Command NOT Found!! Enter '-h' for all Commands");
-        }
-           
 
 
-            /*
-            PrintWriter file =new PrintWriter(new BufferedWriter(new FileWriter("C:\\Users\\Priya\\Desktop\\test\\cars.csv",true)));
-
+            PrintWriter file =new PrintWriter(new BufferedWriter(new FileWriter("C:\\Users\\Priya\\Desktop\\carfinal\\csv\\cars.csv",true)));
+            file.println(" ");
             file.print(id);
             file.print(",");
             file.print(name);
@@ -58,11 +55,20 @@ public class MainClass {
             file.print(price);
             file.print(",");
             file.print(mil);
-            file.println(" ");
             file.close();
-            */
+            
+        } catch (Exception e) {
+            System.out.println("Command NOT Found!! Enter '-h' for all Commands");
+        }
+          
     }
 
+
+
+
+
+
+    // 3) delete car data from DataBase using car id----------------------------------------------------
     else if(args[0].equals("-delete")){
 
         try {
@@ -73,10 +79,14 @@ public class MainClass {
         } catch (Exception e) {
             System.out.println("Command NOT Found!! Enter '-h' for all Commands");
         }
-            
 
     }
 
+
+
+
+
+    // 4) Delete All cars from Database------------------------------------------------------------------- 
     else if(args[0].equals("-deleteAll")){
         try {
             DeleteData.deleteAllCar();
@@ -85,6 +95,11 @@ public class MainClass {
         }
     }
 
+
+
+
+
+    // 5) update car data in the Database using carid -----------------------------------------------------
     else if(args[0].equals("-update")){
         try {
             String id= args[1];
@@ -98,11 +113,14 @@ public class MainClass {
         } catch (Exception e) {
             System.out.println("Command NOT Found!! Enter '-h' for all Commands");
         }
-            
-        
+              
     }
 
 
+
+
+
+    // 6) Print all the cars in the Database-------------------------------------------------------------
     else if(args[0].equals("-printAll")){
 
         try{
@@ -119,15 +137,20 @@ public class MainClass {
         }
     }
 
+
+
+
+
+    // 7) Print Cars using car id & car name(can use Partial Strings)------------------------------------- 
     else if(args[0].equals("-print")){
 
-        try{
+    try{
         if(args[1].equals("-id")){
                 try{
                          List<Car> list2 = PrintData.getCarByID(args[2]);
 
                     if(list2.isEmpty()){
-                             System.out.println("Warning: Entered WRONG Car ID!!");
+                             System.out.println("Error: Entered WRONG Car ID!! (Car NOT Found)");
                     }
                     else{
                             list2.forEach(System.out::println);
@@ -146,7 +169,7 @@ public class MainClass {
             List<Car> list2 = PrintData.getCarByCname(args[2]);
     
                 if(list2.isEmpty()){
-                    System.out.println("Warning: Entered WRONG Car name!!");
+                    System.out.println("Error: Entered WRONG Car name!! (Car NOT Found)");
                 }
                 else{
                      list2.forEach(System.out::println);
@@ -162,59 +185,14 @@ public class MainClass {
     }catch(Exception e){
         System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
     }
-
-
         
-    }
+}
 
      
     
 
-    else if(args[0].equals("-search")){
 
-
-        try {
-
-            if(args[1].equals("-price")){
-                if(args[2].equals("-gt")){
-    
-                    int temp= Integer.valueOf(args[3]);
-                    List<Car> list=  SearchData.search_price_gt(temp);
-                    list.forEach(System.out::println);
-                }
-                else if(args[2].equals("-less")){
-                    
-                    int temp= Integer.valueOf(args[3]);
-                    List<Car> list=  SearchData.search_price_less(temp);
-                    list.forEach(System.out::println);
-                }
-            }
-    
-            else if(args[1].equals("-mileage")){
-                if(args[2].equals("-gt")){
-                    int temp= Integer.valueOf(args[3]);
-                    List<Car> list=  SearchData.search_mileage_gt(temp);
-                    list.forEach(System.out::println);
-                }
-                else if(args[2].equals("-less")){
-                    int temp= Integer.valueOf(args[3]);
-                    List<Car> list=  SearchData.search_mileage_less(temp);
-                    list.forEach(System.out::println);
-                }
-            }
-
-            else{
-                System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
-        }
-        
-
-        
-    }
-
+    // 8) get cars using price & mileage (Exact values)----------------------------------------------------
     else if(args[0].equals("-get")){
         try{
             if(args[1].equals("-price"))
@@ -248,6 +226,76 @@ public class MainClass {
 
 
 
+    // 9) Search cars using price & mileage (greater & less)---------------------------------------------
+    else if(args[0].equals("-search")){
+
+
+        try {
+
+            if(args[1].equals("-price")){
+                if(args[2].equals("-gt")){
+    
+                    int temp= Integer.valueOf(args[3]);
+                    List<Car> list=  SearchData.search_price_gt(temp);
+                    if(list.isEmpty()){
+                        System.out.println("No Cars Found!!");
+                    }
+                    else{
+                    list.forEach(System.out::println);
+                    }
+                }
+                else if(args[2].equals("-less")){
+                    
+                    int temp= Integer.valueOf(args[3]);
+                    List<Car> list=  SearchData.search_price_less(temp);
+                    if(list.isEmpty()){
+                        System.out.println("No Cars Found!!");
+                    }
+                    else{
+                    list.forEach(System.out::println);
+                    }
+                }
+            }
+    
+            else if(args[1].equals("-mileage")){
+                if(args[2].equals("-gt")){
+                    int temp= Integer.valueOf(args[3]);
+                    List<Car> list=  SearchData.search_mileage_gt(temp);
+                    if(list.isEmpty()){
+                        System.out.println("No Cars Found!!");
+                    }
+                    else{
+                    list.forEach(System.out::println);
+                    }
+                }
+                else if(args[2].equals("-less")){
+                    int temp= Integer.valueOf(args[3]);
+                    List<Car> list=  SearchData.search_mileage_less(temp);
+                    if(list.isEmpty()){
+                        System.out.println("No Cars Found!!");
+                    }
+                    else{
+                    list.forEach(System.out::println);
+                    }
+                }
+            }
+
+            else{
+                System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+        }
+          
+    }
+
+    
+
+
+
+
+   // 10) Filter using car price & car mileage---------------------------------------------------------------
     else if(args[0].equals("-filter"))
     {
         try{
@@ -291,8 +339,9 @@ public class MainClass {
 
 
     else if(args[0].equals("-h")){
-        System.out.println("--------------------Commands for Mini Project---------------------");
-        System.out.println(" Insert                     : -insert car_id car_name car_price car_mileage");
+        System.out.println("---------------------------Commands for Car Rental System---------------------------");
+        System.out.println(" Create/Update via CSV      : -enter");
+        System.out.println(" Insert via Cmd             : -insert car_id car_name car_price car_mileage");
         System.out.println(" Delete(All)                : -deleteAll  ");
         System.out.println(" Delete(by car_id)          : -delete car_id ");
         System.out.println(" Update(by car_id)          : -update car_id car_name car_price car_mileage ");
@@ -301,14 +350,15 @@ public class MainClass {
         System.out.println(" Print by CarName           : -print -name car_name");
         System.out.println(" Search(for exact price)    : -get -price car_price");
         System.out.println(" Search(for exact mileage)  : -get -mileage car_mileage");
-        System.out.println(" Search(by price)           : -search -price -gt car_price");
-        System.out.println(" Search(by price)           : -search -price -less car_price");
-        System.out.println(" Search(by mileage)         : -search -mileage -gt car_mileage");
-        System.out.println(" Search(by mileage)         : -search -mileage -less car_mileage");
+        System.out.println(" Search(by price (gt))      : -search -price -gt car_price");
+        System.out.println(" Search(by price (less))    : -search -price -less car_price");
+        System.out.println(" Search(by mileage (gt))    : -search -mileage -gt car_mileage");
+        System.out.println(" Search(by mileage (less))  : -search -mileage -less car_mileage");
         System.out.println(" Filter(in price range)     : -filter -price beg end");
         System.out.println(" Filter(in mileage range)   : -filter -mileage beg end");
         System.out.println(" For Help                   : -h ");
     
+
     }
 
     else{
