@@ -182,6 +182,10 @@ public class MainClass {
             
         }
 
+        else{
+            System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+        }
+
     }catch(Exception e){
         System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
     }
@@ -214,6 +218,9 @@ public class MainClass {
                 {
                     System.out.println("No cars with "+mileage+" mileage");
                 }
+            }
+            else{
+                System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
             }
             }
             catch(Exception e)
@@ -255,6 +262,9 @@ public class MainClass {
                     list.forEach(System.out::println);
                     }
                 }
+                else{
+                    System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+                }
             }
     
             else if(args[1].equals("-mileage")){
@@ -277,6 +287,9 @@ public class MainClass {
                     else{
                     list.forEach(System.out::println);
                     }
+                }
+                else{
+                    System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
                 }
             }
 

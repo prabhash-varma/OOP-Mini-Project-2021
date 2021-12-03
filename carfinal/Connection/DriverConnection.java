@@ -19,6 +19,7 @@ public class DriverConnection {
             connectionProperties.put("user",user);
             connectionProperties.put("password",password);
             con = DriverManager.getConnection(url,connectionProperties);
+           
 
         }
         catch (Exception e){
