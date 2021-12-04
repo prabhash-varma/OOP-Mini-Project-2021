@@ -427,7 +427,7 @@ public class MainClass {
         System.out.println(" Delete(All)                : -deleteAll  ");
         System.out.println(" Delete(by car_id)          : -delete car_id ");
         System.out.println(" Update(by car_id)          : -update car_id car_name car_price car_mileage status(yes/no)");
-        System.out.println(" Update Car Availability    : -update car_id status(yes/no)");
+        System.out.println(" Update Car Availability    : -updateStatus car_id status(yes/no)");
         System.out.println(" Print All cars             : -printAll");
         System.out.println(" Print by CarId             : -print -id car_id");
         System.out.println(" Print by CarName           : -print -name car_name");
