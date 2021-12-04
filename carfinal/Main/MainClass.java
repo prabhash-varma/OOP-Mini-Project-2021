@@ -22,8 +22,14 @@ public class MainClass {
         BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Priya\\Desktop\\carfinal\\csv\\cars.csv"));
         String sline;
         while((sline= reader.readLine())!=null){
-            CreateData.createCar(new Car(sline));
-          
+
+        
+            if(sline.split(",").length==5){
+            CreateData.createCar( new Car(sline));
+            }
+            else{
+                System.out.println("Warning: Only "+sline.split(",").length+" inputs entered !! Enter all input fields");
+            }
         }
         reader.close();
 
@@ -41,7 +47,8 @@ public class MainClass {
             String name = args[2];
             int price= Integer.valueOf(args[3]);
             int mil = Integer.valueOf(args[4]); 
-            Car c1 = new Car(id,name,price,mil);
+            String avail = args[5];
+            Car c1 = new Car(id,name,price,mil,avail);
 
             InsertData.insertCar(c1);
 
@@ -55,6 +62,8 @@ public class MainClass {
             file.print(price);
             file.print(",");
             file.print(mil);
+            file.print(",");
+            file.print(avail);
             file.close();
             
         } catch (Exception e) {
@@ -106,8 +115,8 @@ public class MainClass {
             String name = args[2];
             int price= Integer.valueOf(args[3]);
             int mil = Integer.valueOf(args[4]); 
-           
-            Car c = new Car(id,name,price,mil);
+            String avail = args[5];
+            Car c = new Car(id,name,price,mil,avail);
             UpdateData.updateCar(c);
             
         } catch (Exception e) {
@@ -120,7 +129,33 @@ public class MainClass {
 
 
 
-    // 6) Print all the cars in the Database-------------------------------------------------------------
+
+    // 6) update car availability in the Database using carid -----------------------------------------------------
+    else if(args[0].equals("-updateStatus")){
+      try{  
+            if(args[2].toLowerCase().equals("yes") || args[2].toLowerCase().equals("no")){
+        
+                 String id= args[1];
+                String avail = args[2];
+                UpdateData.updateCarStatus(id,avail);
+            
+            } 
+    
+            else{
+                 System.out.println("Error: Enter 'Yes/No' only for the status ");
+             }
+        }
+        catch (Exception e) {
+                System.out.println("Command NOT Found!! Enter '-h' for all Commands");
+        }
+              
+    }
+
+
+
+
+
+    // 7) Print all the cars in the Database-------------------------------------------------------------
     else if(args[0].equals("-printAll")){
 
         try{
@@ -141,7 +176,7 @@ public class MainClass {
 
 
 
-    // 7) Print Cars using car id & car name(can use Partial Strings)------------------------------------- 
+    // 8) Print Cars using car id & car name(can use Partial Strings)------------------------------------- 
     else if(args[0].equals("-print")){
 
     try{
@@ -196,7 +231,7 @@ public class MainClass {
     
 
 
-    // 8) get cars using price & mileage (Exact values)----------------------------------------------------
+    // 9) get cars using price & mileage (Exact values)----------------------------------------------------
     else if(args[0].equals("-get")){
         try{
             if(args[1].equals("-price"))
@@ -233,7 +268,7 @@ public class MainClass {
 
 
 
-    // 9) Search cars using price & mileage (greater & less)---------------------------------------------
+    // 10) Search cars using price & mileage (greater & less)---------------------------------------------
     else if(args[0].equals("-search")){
 
 
@@ -308,7 +343,7 @@ public class MainClass {
 
 
 
-   // 10) Filter using car price & car mileage---------------------------------------------------------------
+   // 11) Filter using car price & car mileage---------------------------------------------------------------
     else if(args[0].equals("-filter"))
     {
         try{
@@ -347,6 +382,40 @@ public class MainClass {
         }
     }
 
+
+
+
+    
+
+    //12) Check availability of the car using id--------------------------------------------------------
+    else if(args[0].equals("-check")){
+
+        try{
+        if(args[1]!=null){
+        
+
+            String id = args[1];
+            List<Car> list2 = PrintData.getCarByID(id);
+            if(list2.isEmpty()){
+                System.out.println("Error: No car Found!! Enter Correct CarId");
+            }
+            else{
+                 for(Car i: list2){
+                     System.out.println("Availability of Car with ID:"+i.getCid()+" : "+i.getCavail().substring(0,1).toUpperCase()+ i.getCavail().substring(1));
+                 }
+            }
+    
+        
+        }
+        
+        else{
+                 System.out.println("Error: Enter correct CarId");
+        }
+    }  
+        catch (Exception e) {
+            System.out.println("Command NOT Found!! Enter '-h' for all Commands");
+        }
+    }
     
 
 
@@ -354,10 +423,11 @@ public class MainClass {
     else if(args[0].equals("-h")){
         System.out.println("---------------------------Commands for Car Rental System---------------------------");
         System.out.println(" Create/Update via CSV      : -enter");
-        System.out.println(" Insert via Cmd             : -insert car_id car_name car_price car_mileage");
+        System.out.println(" Insert via Cmd             : -insert car_id car_name car_price car_mileage status(yes/no)");
         System.out.println(" Delete(All)                : -deleteAll  ");
         System.out.println(" Delete(by car_id)          : -delete car_id ");
-        System.out.println(" Update(by car_id)          : -update car_id car_name car_price car_mileage ");
+        System.out.println(" Update(by car_id)          : -update car_id car_name car_price car_mileage status(yes/no)");
+        System.out.println(" Update Car Availability    : -update car_id status(yes/no)");
         System.out.println(" Print All cars             : -printAll");
         System.out.println(" Print by CarId             : -print -id car_id");
         System.out.println(" Print by CarName           : -print -name car_name");
@@ -369,6 +439,7 @@ public class MainClass {
         System.out.println(" Search(by mileage (less))  : -search -mileage -less car_mileage");
         System.out.println(" Filter(in price range)     : -filter -price beg end");
         System.out.println(" Filter(in mileage range)   : -filter -mileage beg end");
+        System.out.println(" Check Car Availability     : -check car_id");
         System.out.println(" For Help                   : -h ");
     
 

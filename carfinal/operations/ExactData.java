@@ -19,7 +19,7 @@ public class ExactData {
             st.setInt(1,price);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+                Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
                 c.add(tempcar);
             }
     
@@ -31,6 +31,9 @@ public class ExactData {
     
         return c;
     }
+
+
+
     public static List<Car> show_for_mileage(int mileage){
         List<Car>  c = new ArrayList<Car>();
         Connection con = DriverConnection.getConnection();
@@ -41,7 +44,7 @@ public class ExactData {
             st.setInt(1,mileage);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+                Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
                 c.add(tempcar);
             }
     

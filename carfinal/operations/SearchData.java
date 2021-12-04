@@ -18,7 +18,7 @@ public class SearchData {
                 st.setInt(1,num);
                 ResultSet rs = st.executeQuery();
                 while(rs.next()){
-                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
                     c.add(tempcar);
                 }
     
@@ -40,7 +40,7 @@ public class SearchData {
                 st.setInt(1,num);
                 ResultSet rs = st.executeQuery();
                 while(rs.next()){
-                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
                     c.add(tempcar);
                 }
     
@@ -65,7 +65,7 @@ public class SearchData {
                 st.setInt(1,num);
                 ResultSet rs = st.executeQuery();
                 while(rs.next()){
-                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
                     c.add(tempcar);
                 }
     
@@ -87,7 +87,7 @@ public class SearchData {
                 st.setInt(1,num);
                 ResultSet rs = st.executeQuery();
                 while(rs.next()){
-                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+                    Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
                     c.add(tempcar);
                 }
     

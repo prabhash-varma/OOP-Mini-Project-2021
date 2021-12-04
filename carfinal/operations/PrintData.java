@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 public class PrintData {
-    //Read - ALL
+    //print ALL cars
     public static List<Car> getAllCars(){
 
         List<Car> c= new ArrayList<Car>();
@@ -20,7 +20,7 @@ public class PrintData {
 
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+                Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
                 c.add(tempcar);
             }
         }
@@ -32,7 +32,7 @@ public class PrintData {
 
 
 
-//Read
+//Print by CAR ID
 public static List<Car> getCarByID(String id){
     List<Car>  c = new ArrayList<Car>();
     Connection con = DriverConnection.getConnection();
@@ -43,7 +43,7 @@ public static List<Car> getCarByID(String id){
         st.setString(1,id);
         ResultSet rs = st.executeQuery();
         while(rs.next()){
-            Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+            Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
             c.add(tempcar);
         }
 
@@ -55,6 +55,11 @@ public static List<Car> getCarByID(String id){
 
     return c;
 }
+
+
+
+
+//get Car by name (partial Strings)
 public static List<Car> getCarByCname(String tname){
     
     String name=tname.toLowerCase();
@@ -67,7 +72,7 @@ public static List<Car> getCarByCname(String tname){
 
         ResultSet rs = st.executeQuery();
         while(rs.next()){
-            Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+            Car tempcar = new Car(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
             clist.add(tempcar);
         }
 

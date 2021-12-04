@@ -17,13 +17,14 @@ public class InsertData{
         list = PrintData.getCarByID(c.getCid());
 
         if(list.isEmpty()){
-            final String query="insert into car(Cid,Cname,Cprice,Cmileage) values(?,?,?,?)";
+            final String query="insert into car(Cid,Cname,Cprice,Cmileage,Cavail) values(?,?,?,?,?)";
 
             try(PreparedStatement st= con.prepareStatement(query)){
                 st.setString(1, c.getCid());
                 st.setString(2, c.getCname());
                 st.setInt(3, c.getCprice());
                 st.setInt(4, c.getCmileage());
+                st.setString(5, c.getCavail());
     
                 int rowsAffected = st.executeUpdate();
 
@@ -41,10 +42,10 @@ public class InsertData{
 
                
         else{ 
-            Car temp = new Car(list.get(0).getCid(),list.get(0).getCname(),list.get(0).getCprice(),list.get(0).getCmileage());
+            Car temp = new Car(list.get(0).getCid(),list.get(0).getCname(),list.get(0).getCprice(),list.get(0).getCmileage(),list.get(0).getCavail());
     
             
-            if((temp.getCid().equals(c.getCid()))  && (temp.getCname().equals(c.getCname())) && (temp.getCprice()==c.getCprice()) && (temp.getCmileage()== c.getCmileage() )){
+            if((temp.getCid().equals(c.getCid()))  && (temp.getCname().equals(c.getCname())) && (temp.getCprice()==c.getCprice()) && (temp.getCmileage()== c.getCmileage()&& (temp.getCavail().equals(c.getCavail())) )){
                 System.out.println("Car with Id:"+c.getCid()+" already exists in the Database.");
                
             }
