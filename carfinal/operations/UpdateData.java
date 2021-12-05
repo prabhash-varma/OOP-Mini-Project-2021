@@ -21,14 +21,14 @@ public class UpdateData {
 
             if(rowsAffected==0){
 
-                System.out.println("--------------------------");
-                System.out.println("| Error: Car NOT Found!! |");
-                System.out.println("--------------------------");
+                System.out.println("----------------------------");
+                System.out.println("|  Error: Car NOT Found!!  |");
+                System.out.println("----------------------------");
             }
             else{
-            System.out.println("--------------------------------------");
-            System.out.println("| Car with Id:"+c.getCid()+" has been updated. |");
-            System.out.println("--------------------------------------");
+            System.out.println("---------------------------------");
+            System.out.println("|  Data successfully updated!!  |");
+            System.out.println("---------------------------------");
             }
         }
         catch(SQLException e){
@@ -51,14 +51,14 @@ public class UpdateData {
             int rowsAffected =st.executeUpdate();
 
             if(rowsAffected==0){
-                System.out.println("--------------------------");
-                System.out.println("| Error: Car NOT Found!! |");
-                System.out.println("--------------------------");
+                System.out.println("----------------------------");
+                System.out.println("|  Error: Car NOT Found!!  |");
+                System.out.println("----------------------------");
             }
             else{
-            System.out.println("--------------------------------------");
-            System.out.println("| Car with Id:"+id+" has been updated. |");
-            System.out.println("--------------------------------------");
+                System.out.println("---------------------------------");
+                System.out.println("|  Data successfully updated!!  |");
+                System.out.println("---------------------------------");
             }
         }
         catch(SQLException e){

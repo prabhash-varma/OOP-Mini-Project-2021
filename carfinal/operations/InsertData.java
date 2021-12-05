@@ -2,6 +2,10 @@ package operations;
 
 import Car.*;
 import Connection.*;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +33,34 @@ public class InsertData{
                 int rowsAffected = st.executeUpdate();
 
                 if(rowsAffected!=0){
-                    System.out.println("---------------------------------------");
-                    System.out.println("| Car with Id:"+c.getCid()+" has been inserted. |");
-                    System.out.println("---------------------------------------");
+                    System.out.println("----------------------------------");
+                    System.out.println("|  Data successfully inserted!!  |");
+                    System.out.println("----------------------------------");
                 }
                 else{
                     System.out.println("--------------------------------------------");
                     System.out.println("| Error: Car Data not inserted!! Try Again |");
                     System.out.println("--------------------------------------------");
                 }
+
+                try {
+                    PrintWriter file =new PrintWriter(new BufferedWriter(new FileWriter("C:\\Uses\\Priya\\Desktop\\carfinal\\csv\\cars.csv",true)));
+                    file.println(" ");
+                    file.print(c.getCid());
+                    file.print(",");
+                    file.print(c.getCname());
+                    file.print(",");
+                    file.print(c.getCprice());
+                    file.print(",");
+                    file.print(c.getCmileage());
+                    file.print(",");
+                    file.print(c.getCavail());
+                    file.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            
             }
             catch(SQLException e){
                 e.printStackTrace();
@@ -50,9 +73,9 @@ public class InsertData{
     
             
             if((temp.getCid().equals(c.getCid()))  && (temp.getCname().equals(c.getCname())) && (temp.getCprice()==c.getCprice()) && (temp.getCmileage()== c.getCmileage()&& (temp.getCavail().equals(c.getCavail())) )){
-                System.out.println("----------------------------------------------------");
-                System.out.println("| Car with Id:"+c.getCid()+" already exists in the Database. |");
-                System.out.println("----------------------------------------------------");
+                System.out.println("----------------------------------------------");
+                System.out.println("|  We already have this car in our database  |");
+                System.out.println("----------------------------------------------");
                
             }
             

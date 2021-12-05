@@ -18,14 +18,14 @@ public class DeleteData {
             int rowsAffected = st.executeUpdate();
 
             if(rowsAffected==0){
-                System.out.println("---------------------------------");
-                System.out.println("| Error: No car with Id:"+car_id+" !! |");
-                System.out.println("---------------------------------");
+                System.out.println("--------------------------------------");
+                System.out.println("|  Sorry! We couldn't find anything  |");
+                System.out.println("--------------------------------------");
             }
             else{
-                System.out.println("--------------------------------------");
-                System.out.println("| Car with ID:"+car_id+" has been deleted. |");
-                System.out.println("--------------------------------------");
+                System.out.println("---------------------------------");
+                System.out.println("|  Data successfully deleted!!  |");
+                System.out.println("---------------------------------");
             }
         }
         catch(SQLException e){

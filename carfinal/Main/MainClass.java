@@ -6,10 +6,7 @@ import Car.*;
 import operations.*;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.List;
 
 
@@ -57,18 +54,7 @@ public class MainClass {
             InsertData.insertCar(c1);
 
 
-            PrintWriter file =new PrintWriter(new BufferedWriter(new FileWriter("C:\\Users\\Priya\\Desktop\\carfinal\\csv\\cars.csv",true)));
-            file.println(" ");
-            file.print(id);
-            file.print(",");
-            file.print(name);
-            file.print(",");
-            file.print(price);
-            file.print(",");
-            file.print(mil);
-            file.print(",");
-            file.print(avail);
-            file.close();
+            
             
         } catch (Exception e) {
             System.out.println("-----------------------------------------------------");
