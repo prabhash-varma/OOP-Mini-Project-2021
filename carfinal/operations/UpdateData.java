@@ -5,7 +5,7 @@ import Connection.*;
 import java.sql.*;
 
 public class UpdateData {
-    //Update
+    //Update CAR DATA using CAR ID
     public static void updateCar(Car c){
         Connection con = DriverConnection.getConnection();
         final String query= "update car set Cname=?, Cprice=?, Cmileage=?, Cavail=? where Cid=?";
@@ -20,10 +20,15 @@ public class UpdateData {
             int rowsAffected =st.executeUpdate();
 
             if(rowsAffected==0){
-                System.out.println("Error: Car NOT Found!!");
+
+                System.out.println("--------------------------");
+                System.out.println("| Error: Car NOT Found!! |");
+                System.out.println("--------------------------");
             }
             else{
-            System.out.println("Car with Id:"+c.getCid()+" has been updated.");
+            System.out.println("--------------------------------------");
+            System.out.println("| Car with Id:"+c.getCid()+" has been updated. |");
+            System.out.println("--------------------------------------");
             }
         }
         catch(SQLException e){
@@ -34,7 +39,7 @@ public class UpdateData {
 
 
 
-
+    //Update CAR STATUS using CAR ID
     public static void updateCarStatus(String id,String avail) {
         Connection con = DriverConnection.getConnection();
         final String query= "update car set Cavail=? where Cid=?";
@@ -46,10 +51,14 @@ public class UpdateData {
             int rowsAffected =st.executeUpdate();
 
             if(rowsAffected==0){
-                System.out.println("Error: Car NOT Found!!");
+                System.out.println("--------------------------");
+                System.out.println("| Error: Car NOT Found!! |");
+                System.out.println("--------------------------");
             }
             else{
-            System.out.println("Car with Id:"+id+" has been updated.");
+            System.out.println("--------------------------------------");
+            System.out.println("| Car with Id:"+id+" has been updated. |");
+            System.out.println("--------------------------------------");
             }
         }
         catch(SQLException e){

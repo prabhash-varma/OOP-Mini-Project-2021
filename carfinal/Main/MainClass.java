@@ -1,3 +1,5 @@
+
+
 package Main;
 
 import Car.*;
@@ -28,7 +30,9 @@ public class MainClass {
             CreateData.createCar( new Car(sline));
             }
             else{
-                System.out.println("Warning: Only "+sline.split(",").length+" inputs entered !! Enter all input fields");
+                System.out.println("--------------------------------------------------------------");
+                System.out.println("|  Warning: Only "+sline.split(",").length+" inputs entered !! Enter all input fields  |");
+                System.out.println("--------------------------------------------------------------");
             }
         }
         reader.close();
@@ -67,7 +71,9 @@ public class MainClass {
             file.close();
             
         } catch (Exception e) {
-            System.out.println("Command NOT Found!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
         }
           
     }
@@ -86,7 +92,9 @@ public class MainClass {
             DeleteData.deleteCar(car_id);
             
         } catch (Exception e) {
-            System.out.println("Command NOT Found!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
         }
 
     }
@@ -100,7 +108,9 @@ public class MainClass {
         try {
             DeleteData.deleteAllCar();
         } catch (Exception e) {
-            System.out.println("Command NOT Found!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
         }
     }
 
@@ -120,7 +130,9 @@ public class MainClass {
             UpdateData.updateCar(c);
             
         } catch (Exception e) {
-            System.out.println("Command NOT Found!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
         }
               
     }
@@ -142,11 +154,15 @@ public class MainClass {
             } 
     
             else{
-                 System.out.println("Error: Enter 'Yes/No' only for the status ");
+                 System.out.println("-----------------------------------------------");
+                 System.out.println("|  Error: Enter 'Yes/No' only for the status  |");
+                 System.out.println("-----------------------------------------------");
              }
         }
         catch (Exception e) {
-                System.out.println("Command NOT Found!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
         }
               
     }
@@ -161,14 +177,27 @@ public class MainClass {
         try{
             List<Car> list2 = PrintData.getAllCars();
             if(list2.isEmpty()){
-                System.out.println("List is Empty!!");
+                System.out.println("------------------------------");
+                System.out.println("|  Sorry! we're out of Cars  |");
+                System.out.println("------------------------------");
             }
             else{
-                 list2.forEach(System.out::println);
+                 //list2.forEach(System.out::println);
+                 System.out.println("---------------------------------------------------------------------------");
+                 System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                 System.out.println();
+                 System.out.println("---------------------------------------------------------------------------");
+                 for(int i=0;i<list2.size();i++)
+                 {
+                    list2.get(i).formatted_print();
+                 }
+                 System.out.println("---------------------------------------------------------------------------");
             }
         }
         catch (Exception e) {
-            System.out.println("Command NOT Found!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
         }
     }
 
@@ -185,15 +214,28 @@ public class MainClass {
                          List<Car> list2 = PrintData.getCarByID(args[2]);
 
                     if(list2.isEmpty()){
-                             System.out.println("Error: Entered WRONG Car ID!! (Car NOT Found)");
+                             System.out.println("--------------------------------------");
+                             System.out.println("|  Sorry! We couldn't find anything  |");
+                             System.out.println("--------------------------------------");
                     }
                     else{
-                            list2.forEach(System.out::println);
+                            //list2.forEach(System.out::println);
+                            System.out.println("---------------------------------------------------------------------------");
+                            System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                            System.out.println();
+                            System.out.println("---------------------------------------------------------------------------");
+                            for(int i=0;i<list2.size();i++)
+                            {
+                                list2.get(i).formatted_print();
+                            }
+                            System.out.println("---------------------------------------------------------------------------");
                     }
             
                 }
                 catch(Exception e){
-                            System.out.println("Command NOT FOUND");
+                    System.out.println("-----------------------------------------------------");
+                    System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+                    System.out.println("-----------------------------------------------------");
                 }
         }
 
@@ -204,25 +246,42 @@ public class MainClass {
             List<Car> list2 = PrintData.getCarByCname(args[2]);
     
                 if(list2.isEmpty()){
-                    System.out.println("Error: Entered WRONG Car name!! (Car NOT Found)");
+                    System.out.println("--------------------------------------");
+                    System.out.println("|  Sorry! We couldn't find anything  |");
+                    System.out.println("--------------------------------------");
                 }
                 else{
-                     list2.forEach(System.out::println);
+                     //list2.forEach(System.out::println);
+                    System.out.println("---------------------------------------------------------------------------");
+                    System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                    System.out.println();
+                    System.out.println("---------------------------------------------------------------------------");
+                    for(int i=0;i<list2.size();i++)
+                    {
+                        list2.get(i).formatted_print();
+                    }
+                    System.out.println("---------------------------------------------------------------------------");
                 }
                 
             }
             catch(Exception e){
-                System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+                System.out.println("-----------------------------------------------------");
+                System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+                System.out.println("-----------------------------------------------------");
             }
             
         }
 
         else{
-            System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
         }
 
     }catch(Exception e){
-        System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
     }
         
 }
@@ -237,30 +296,60 @@ public class MainClass {
             if(args[1].equals("-price"))
             {
                 int price = Integer.valueOf(args[2]);
-                List<Car> list=  ExactData.show_for_price(price);
-                list.forEach(System.out::println);
-                if(list.isEmpty())
+                List<Car> list2=  ExactData.show_for_price(price);
+                if(list2.isEmpty())
                 {
-                    System.out.println("No cars exist with the price tag "+price+" Rs");
+                    System.out.println("--------------------------------------");
+                    System.out.println("|  Sorry! We couldn't find anything  |");
+                    System.out.println("--------------------------------------");
+                }
+                else
+                {
+                    System.out.println("---------------------------------------------------------------------------");
+                    System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                    System.out.println();
+                    System.out.println("---------------------------------------------------------------------------");
+                    for(int i=0;i<list2.size();i++)
+                    {
+                        list2.get(i).formatted_print();
+                    }
+                    System.out.println("---------------------------------------------------------------------------");
                 }
             }
             else if(args[1].equals("-mileage"))
             {
                 int mileage = Integer.valueOf(args[2]);
-                List<Car> list=  ExactData.show_for_mileage(mileage);
-                list.forEach(System.out::println);
-                if(list.isEmpty())
+                List<Car> list2=  ExactData.show_for_mileage(mileage);
+                if(list2.isEmpty())
                 {
-                    System.out.println("No cars with "+mileage+" mileage");
+                    System.out.println("--------------------------------------");
+                    System.out.println("|  Sorry! We couldn't find anything  |");
+                    System.out.println("--------------------------------------");
+                }
+                else
+                {
+                    System.out.println("---------------------------------------------------------------------------");
+                    System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                    System.out.println();
+                    System.out.println("---------------------------------------------------------------------------");
+                    for(int i=0;i<list2.size();i++)
+                    {
+                        list2.get(i).formatted_print();
+                    }
+                    System.out.println("---------------------------------------------------------------------------");
                 }
             }
             else{
-                System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+                System.out.println("-----------------------------------------------------");
+                System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+                System.out.println("-----------------------------------------------------");
             }
             }
             catch(Exception e)
             {
-                System.out.println("Command NOT Found!! Enter '-h' for all Commands");
+                System.out.println("-----------------------------------------------------");
+                System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+                System.out.println("-----------------------------------------------------");
             }
     }
 
@@ -278,62 +367,110 @@ public class MainClass {
                 if(args[2].equals("-gt")){
     
                     int temp= Integer.valueOf(args[3]);
-                    List<Car> list=  SearchData.search_price_gt(temp);
-                    if(list.isEmpty()){
-                        System.out.println("No Cars Found!!");
+                    List<Car> list2=  SearchData.search_price_gt(temp);
+                    if(list2.isEmpty()){
+                        System.out.println("--------------------------------------");
+                        System.out.println("|  Sorry! We couldn't find anything  |");
+                        System.out.println("--------------------------------------");
                     }
                     else{
-                    list.forEach(System.out::println);
+                        System.out.println("---------------------------------------------------------------------------");
+                        System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                        System.out.println();
+                        System.out.println("---------------------------------------------------------------------------");
+                        for(int i=0;i<list2.size();i++)
+                        {
+                            list2.get(i).formatted_print();
+                        }
+                        System.out.println("---------------------------------------------------------------------------");
                     }
                 }
                 else if(args[2].equals("-less")){
                     
                     int temp= Integer.valueOf(args[3]);
-                    List<Car> list=  SearchData.search_price_less(temp);
-                    if(list.isEmpty()){
-                        System.out.println("No Cars Found!!");
+                    List<Car> list2=  SearchData.search_price_less(temp);
+                    if(list2.isEmpty()){
+                        System.out.println("--------------------------------------");
+                        System.out.println("|  Sorry! We couldn't find anything  |");
+                        System.out.println("--------------------------------------");
                     }
                     else{
-                    list.forEach(System.out::println);
+                        System.out.println("---------------------------------------------------------------------------");
+                        System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                        System.out.println();
+                        System.out.println("---------------------------------------------------------------------------");
+                        for(int i=0;i<list2.size();i++)
+                        {
+                            list2.get(i).formatted_print();
+                        }
+                        System.out.println("---------------------------------------------------------------------------");
                     }
                 }
                 else{
-                    System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+                    System.out.println("-----------------------------------------------------");
+                    System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+                    System.out.println("-----------------------------------------------------");
                 }
             }
     
             else if(args[1].equals("-mileage")){
                 if(args[2].equals("-gt")){
                     int temp= Integer.valueOf(args[3]);
-                    List<Car> list=  SearchData.search_mileage_gt(temp);
-                    if(list.isEmpty()){
-                        System.out.println("No Cars Found!!");
+                    List<Car> list2=  SearchData.search_mileage_gt(temp);
+                    if(list2.isEmpty()){
+                        System.out.println("--------------------------------------");
+                        System.out.println("|  Sorry! We couldn't find anything  |");
+                        System.out.println("--------------------------------------");
                     }
                     else{
-                    list.forEach(System.out::println);
+                        System.out.println("---------------------------------------------------------------------------");
+                        System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                        System.out.println();
+                        System.out.println("---------------------------------------------------------------------------");
+                        for(int i=0;i<list2.size();i++)
+                        {
+                            list2.get(i).formatted_print();
+                        }
+                        System.out.println("---------------------------------------------------------------------------");
                     }
                 }
                 else if(args[2].equals("-less")){
                     int temp= Integer.valueOf(args[3]);
-                    List<Car> list=  SearchData.search_mileage_less(temp);
-                    if(list.isEmpty()){
-                        System.out.println("No Cars Found!!");
+                    List<Car> list2=  SearchData.search_mileage_less(temp);
+                    if(list2.isEmpty()){
+                        System.out.println("--------------------------------------");
+                        System.out.println("|  Sorry! We couldn't find anything  |");
+                        System.out.println("--------------------------------------");
                     }
                     else{
-                    list.forEach(System.out::println);
+                        System.out.println("---------------------------------------------------------------------------");
+                        System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                        System.out.println();
+                        System.out.println("---------------------------------------------------------------------------");
+                        for(int i=0;i<list2.size();i++)
+                        {
+                            list2.get(i).formatted_print();
+                        }
+                        System.out.println("---------------------------------------------------------------------------");
                     }
                 }
                 else{
-                    System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+                    System.out.println("-----------------------------------------------------");
+                    System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+                    System.out.println("-----------------------------------------------------");
                 }
             }
 
             else{
-                System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+                System.out.println("-----------------------------------------------------");
+                System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+                System.out.println("-----------------------------------------------------");
             }
             
         } catch (Exception e) {
-            System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
         }
           
     }
@@ -352,11 +489,24 @@ public class MainClass {
             int beg= Integer.valueOf(args[2]);
             int end= Integer.valueOf(args[3]);
             FilterData f1 = new FilterData();
-            List<Car> list=  f1.filter_price(beg,end);
-            list.forEach(System.out::println);
-            if(list.isEmpty())
+            List<Car> list2=  f1.filter_price(beg,end);
+            if(list2.isEmpty())
             {
-                System.out.println("No cars in the price range "+beg+"-"+end);
+                System.out.println("--------------------------------------");
+                System.out.println("|  Sorry! We couldn't find anything  |");
+                System.out.println("--------------------------------------");
+            }
+            else
+            {
+                System.out.println("---------------------------------------------------------------------------");
+                System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                System.out.println();
+                System.out.println("---------------------------------------------------------------------------");
+                for(int i=0;i<list2.size();i++)
+                {
+                    list2.get(i).formatted_print();
+                }
+                System.out.println("---------------------------------------------------------------------------");
             }
         }
         else if(args[1].equals("-mileage"))
@@ -364,21 +514,38 @@ public class MainClass {
             int beg= Integer.valueOf(args[2]);
             int end= Integer.valueOf(args[3]);
             FilterData f2 = new FilterData();
-            List<Car> list=  f2.filter_mileage(beg,end);
-            list.forEach(System.out::println);
-            if(list.isEmpty())
+            List<Car> list2=  f2.filter_mileage(beg,end);
+            if(list2.isEmpty())
             {
-                System.out.println("No cars in the mileage range "+beg+"-"+end);
+                System.out.println("--------------------------------------");
+                System.out.println("|  Sorry! We couldn't find anything  |");
+                System.out.println("--------------------------------------");
+            }
+            else
+            {
+                System.out.println("---------------------------------------------------------------------------");
+                System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                System.out.println();
+                System.out.println("---------------------------------------------------------------------------");
+                for(int i=0;i<list2.size();i++)
+                {
+                    list2.get(i).formatted_print();
+                }
+                System.out.println("---------------------------------------------------------------------------");
             }
         }
         else 
         {
-            System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
         }
         }
         catch(Exception e)
         {
-            System.out.println("Command NOT FOUND!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
         }
     }
 
@@ -397,11 +564,24 @@ public class MainClass {
             String id = args[1];
             List<Car> list2 = PrintData.getCarByID(id);
             if(list2.isEmpty()){
-                System.out.println("Error: No car Found!! Enter Correct CarId");
+                System.out.println("--------------------------------------");
+                System.out.println("|  Sorry! We couldn't find anything  |");
+                System.out.println("--------------------------------------");
             }
             else{
                  for(Car i: list2){
-                     System.out.println("Availability of Car with ID:"+i.getCid()+" : "+i.getCavail().substring(0,1).toUpperCase()+ i.getCavail().substring(1));
+                     System.out.println("---------------------------------------------------------------------------");
+                     System.out.println("|                  Availability of Car with ID:"+i.getCid()+" : "+i.getCavail().substring(0,1).toUpperCase()+ i.getCavail().substring(1)+ "                 |");
+                     System.out.println("---------------------------------------------------------------------------");
+                     if(i.getCavail().equals("yes"))
+                     {
+                        System.out.println("---------------------------------------------------------------------------");
+                        System.out.printf("| %10s | %15s | %10s | %10s |%15s |", "CAR ID", "CAR NAME", "PRICE", "MILEAGE","AVAILABILITY");
+                        System.out.println();
+                        System.out.println("---------------------------------------------------------------------------");
+                        i.formatted_print();
+                        System.out.println("---------------------------------------------------------------------------");
+                     }
                  }
             }
     
@@ -409,11 +589,16 @@ public class MainClass {
         }
         
         else{
-                 System.out.println("Error: Enter correct CarId");
+
+            System.out.println("--------------------------------------");
+            System.out.println("|  Sorry! We couldn't find anything  |");
+            System.out.println("--------------------------------------");
         }
     }  
         catch (Exception e) {
-            System.out.println("Command NOT Found!! Enter '-h' for all Commands");
+            System.out.println("-----------------------------------------------------");
+            System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+            System.out.println("-----------------------------------------------------");
         }
     }
     
@@ -446,7 +631,9 @@ public class MainClass {
     }
 
     else{
-       System.out.printf("\n Command NOT Found!! Enter '-h' for all Commands\n");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("|  Command NOT Found!! Enter '-h' for all Commands  |");
+        System.out.println("-----------------------------------------------------");
     }
 
 

@@ -29,10 +29,14 @@ public class InsertData{
                 int rowsAffected = st.executeUpdate();
 
                 if(rowsAffected!=0){
-                    System.out.println("Car with Id:"+c.getCid()+" has been inserted.");
+                    System.out.println("---------------------------------------");
+                    System.out.println("| Car with Id:"+c.getCid()+" has been inserted. |");
+                    System.out.println("---------------------------------------");
                 }
                 else{
-                    System.out.println("Error: Car Data not inserted!! Try Again");
+                    System.out.println("--------------------------------------------");
+                    System.out.println("| Error: Car Data not inserted!! Try Again |");
+                    System.out.println("--------------------------------------------");
                 }
             }
             catch(SQLException e){
@@ -46,7 +50,9 @@ public class InsertData{
     
             
             if((temp.getCid().equals(c.getCid()))  && (temp.getCname().equals(c.getCname())) && (temp.getCprice()==c.getCprice()) && (temp.getCmileage()== c.getCmileage()&& (temp.getCavail().equals(c.getCavail())) )){
-                System.out.println("Car with Id:"+c.getCid()+" already exists in the Database.");
+                System.out.println("----------------------------------------------------");
+                System.out.println("| Car with Id:"+c.getCid()+" already exists in the Database. |");
+                System.out.println("----------------------------------------------------");
                
             }
             

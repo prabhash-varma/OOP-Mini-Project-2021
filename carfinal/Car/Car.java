@@ -78,10 +78,17 @@
     }
 
 
+
+    public void formatted_print()
+    {
+        System.out.printf("| %10s | %15s | %10d | %10d | %10s     |",this.cid.toUpperCase(),this.cname.toUpperCase(),this.cprice,this.cmileage,this.cavail.toUpperCase());
+        System.out.println();
+    }
+
     @Override
     public String toString(){
         String temp= this.cname;
-        String name= temp.substring(0,1).toUpperCase()+ temp.substring(1);
+        String name= temp.substring(0,1).toUpperCase()+ temp.substring(1);  //Converting First letter into Uppercase
         String avail= this.cavail;
         String status= avail.substring(0,1).toUpperCase()+ avail.substring(1);
 

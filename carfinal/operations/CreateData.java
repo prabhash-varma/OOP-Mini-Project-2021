@@ -17,6 +17,7 @@ public class CreateData {
         List<Car> list= new ArrayList<Car>();
         list = PrintData.getCarByID(c.getCid());
 
+        //If list is Empty, it creates a new row
         if(list.isEmpty()){
             final String query="insert into car(Cid,Cname,Cprice,Cmileage,Cavail) values(?,?,?,?,?)";
 
@@ -36,7 +37,7 @@ public class CreateData {
             }
         }
 
-               
+        //If CAR ID already exists in the table and all the inputs are same then Row will be unaffected    
         else{ 
             Car temp = new Car(list.get(0).getCid(),list.get(0).getCname(),list.get(0).getCprice(),list.get(0).getCmileage(),list.get(0).getCavail());
     
@@ -47,6 +48,8 @@ public class CreateData {
             }
             
            
+
+         //IF CAR ID exists in the table and other inputs are different then the row will be updated   
             else{
 
                 final String query= "update car set Cname=?, Cprice=?, Cmileage=?, Cavail=? where Cid=?";

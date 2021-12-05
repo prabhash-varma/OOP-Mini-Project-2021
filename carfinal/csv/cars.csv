@@ -1,7 +1,9 @@
 c100,benz,12000,17,yes
 c101,datsun,1400,18,yes
-c102,kia,1100,22,yes
+c102,TATA,1100,22,yes
 c103,kia,1000,23,yes
-c104,Mahi,1600,22,yes
-c105,hyundai,1700,28,yes 
+c104,Hyundai,1600,22,yes
 c106,audi,1200,12,yes
+c107,kia,1000,23,yes
+c108,Mahindra,1600,22,yes
+c109,audi,1200,12,yes

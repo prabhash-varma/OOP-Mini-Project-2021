@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchData {
-    //Search by price
+    //Search by price (greater)
     public static List<Car> search_price_gt(int num) {
         List<Car> c= new ArrayList<Car>();
             Connection con= DriverConnection.getConnection();
@@ -32,6 +32,7 @@ public class SearchData {
     }
 
 
+    //Search by price (less)
     public static List<Car> search_price_less(int num) {
         List<Car> c= new ArrayList<Car>();
             Connection con= DriverConnection.getConnection();
@@ -56,7 +57,7 @@ public class SearchData {
 
 
 
-    //search by mileage
+    //search by mileage(greater)
     public static List<Car> search_mileage_gt(int num) {
         List<Car> c= new ArrayList<Car>();
             Connection con= DriverConnection.getConnection();
@@ -79,6 +80,8 @@ public class SearchData {
     }
 
 
+
+    //Search by mileage(less)
     public static List<Car> search_mileage_less(int num) {
         List<Car> c= new ArrayList<Car>();
             Connection con= DriverConnection.getConnection();

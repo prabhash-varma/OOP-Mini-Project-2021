@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class DeleteData {
 
-    //delete by car name
+    //Delete by car ID
     public static void deleteCar(String car_id){
         Connection con = DriverConnection.getConnection();
         final String query="delete from car where Cid= ? ";
@@ -18,14 +18,20 @@ public class DeleteData {
             int rowsAffected = st.executeUpdate();
 
             if(rowsAffected==0){
-                System.out.println("Error: No car with Id:"+car_id+" !! ");
+                System.out.println("---------------------------------");
+                System.out.println("| Error: No car with Id:"+car_id+" !! |");
+                System.out.println("---------------------------------");
             }
             else{
-            System.out.println("Car with ID:"+car_id+" has been deleted.");
+                System.out.println("--------------------------------------");
+                System.out.println("| Car with ID:"+car_id+" has been deleted. |");
+                System.out.println("--------------------------------------");
             }
         }
         catch(SQLException e){
-            System.out.println("Error!! Try Again");
+            System.out.println("---------------------");
+            System.out.println("| Error!! Try Again |");
+            System.out.println("---------------------");
         }
     }
 
@@ -37,14 +43,14 @@ public class DeleteData {
         final String query="Truncate table car";
 
         try(PreparedStatement st= con.prepareStatement(query)){
-            int rowsAffected = st.executeUpdate();
+             st.executeUpdate();
 
-            if(rowsAffected==0){
-                System.out.println("All Cars have been deleted.");
-            }
-            else{
-            System.out.println("All Cars have been deleted.");
-            }
+            
+                System.out.println("------------------------------");
+                System.out.println("| All Cars have been deleted |.");
+                System.out.println("------------------------------");
+            
+            
         }
         catch(SQLException e){
             e.printStackTrace();
