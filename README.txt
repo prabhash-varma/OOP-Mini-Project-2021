@@ -2,15 +2,15 @@
 
               Group - 18                        
                                                 
-1)LALITH KUMAR GOLLA            S20200010065    (SPOC)
+1)LALITH KUMAR GOLLA               
                                                 
-2)BUDDHARAJU PRABHASH VARMA     S20200010044    
+2)BUDDHARAJU PRABHASH VARMA        
                                                 
-3)ASHRITH ROYAL TALLURI         S20200010024
+3)ASHRITH ROYAL TALLURI         
 
-4)P.ABHINAV KIRAN               S20200010155
+4)P.ABHINAV KIRAN              
 
-5)Jayachand Bokka               S20180010028
+5)Jayachand Bokka             
 
 
 
