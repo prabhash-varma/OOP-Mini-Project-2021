@@ -2,9 +2,9 @@
 
               Group - 18                        
                                                 
-1)LALITH KUMAR GOLLA               
+1)BUDDHARAJU PRABHASH VARMA               
                                                 
-2)BUDDHARAJU PRABHASH VARMA        
+2)LALITH KUMAR GOLLA        
                                                 
 3)ASHRITH ROYAL TALLURI         
 
